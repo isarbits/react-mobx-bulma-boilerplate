@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 import Image from 'app/components/ImageComponent';
+import Container from 'app/components/ContainerComponent';
 
 interface IProps {
     isTransparent?: boolean;
@@ -38,17 +39,25 @@ export default class NavbarComponent extends React.Component<IProps, IState> {
 
         return (
             <nav className={`navbar ${ modifiers } ${ isActive }`}>
-                <div className="navbar-brand">
-                    <Link to="/" className="navbar-item">
-                        <Image src="logo.png" />
-                    </Link>
+                <Container>
+                    <div className="navbar-brand">
+                        <Link to="/" className="navbar-item">
+                            <Image src="logo.png" />
+                        </Link>
 
-                    <a role="button" className={`navbar-burger ${ isActive }`} onClick={ () => this.triggerMobileNav() }>
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                    </a>
-                </div>
+                        <a role="button" className={`navbar-burger ${ isActive }`} onClick={ () => this.triggerMobileNav() }>
+                            <span aria-hidden="true"></span>
+                            <span aria-hidden="true"></span>
+                            <span aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <div className={`navbar-menu ${ isActive }`}>
+                        <div className="navbar-start">
+                            <Link to="/login" className="navbar-item">Login</Link>
+                        </div>
+                        <div className="navbar-end"></div>
+                    </div>
+                </Container>
             </nav>
         );
     }
