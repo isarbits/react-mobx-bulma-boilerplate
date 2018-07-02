@@ -4,7 +4,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "yarn && webpack-dev-server --config ./webpack.app.dev.js --hot --progress",
-    "build": "NODE_ENV=production npm run vendor.production && NODE_ENV=production npm run app.production"
+    "build": "NODE_ENV=production npm run vendor.production && NODE_ENV=production npm run app.production",
+    "storybook": "start-storybook -p 9001 -c storybook",
+    "test": "cypress open"
   },
   "license": "ISC",
   "dependencies": {
@@ -15,15 +17,19 @@
     "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
+    "@storybook/react": "^3.4.8",
     "@types/classnames": "^2.2.4",
     "@types/react": "^16.4.1",
     "@types/react-dom": "^16.0.6",
     "@types/react-router-dom": "^4.2.7",
+    "@types/validator": "^9.4.1",
+    "babel-core": "^6.26.3",
     "bulma": "^0.7.1",
     "bulma-extensions": "^2.2.1",
     "classnames": "^2.2.6",
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^0.28.11",
+    "cypress": "^3.0.1",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.11",
     "fork-ts-checker-webpack-plugin": "^0.4.2",
@@ -34,6 +40,7 @@
     "ts-loader": "^4.4.1",
     "tslint": "^5.10.0",
     "typescript": "^2.9.2",
+    "validator": "^10.4.0",
     "webpack": "^4.12.0",
     "webpack-cleanup-plugin": "^0.5.1",
     "webpack-cli": "^3.0.8",

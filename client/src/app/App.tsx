@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Route, HashRouter as Router } from 'react-router-dom';
+import { Route, BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 
 import ScrollToTop from './utils/ScrollToTop';
