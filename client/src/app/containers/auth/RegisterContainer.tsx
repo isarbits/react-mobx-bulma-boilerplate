@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as validator from 'validator';
 
+import { t, todo } from 'app/utils/translate';
 import Section from 'app/components/SectionComponent';
 import Container from 'app/components/ContainerComponent';
 import FormField from 'app/components/FormFieldComponent';
@@ -12,7 +13,7 @@ interface IState {
 	inputValid: boolean;
 }
 
-export default class LoginContainer extends React.Component<any, IState> {
+export default class RegisterContainer extends React.Component<any, IState> {
 
 	constructor(props: any) {
 		super(props);
@@ -22,6 +23,10 @@ export default class LoginContainer extends React.Component<any, IState> {
 			password: '',
 			inputValid: true
 		};
+	}
+
+	public componentDidMount() {
+		this.validateInput();
 	}
 
 	private emailChange(eValue: string) {
@@ -54,24 +59,24 @@ export default class LoginContainer extends React.Component<any, IState> {
 					<div className="columns">
 						<div className="column is-6 is-offset-3">
 							<div className="box">
-								<h1 className="title">Login</h1>
+								<h1 className="title">{ t().register }</h1>
 
 								<form className="form">
 									<FormField
 										value={ email }
 										onChange={(e) => this.emailChange(e.target.value)}
-										label="Email Address"
+										label={ t().email_label }
 										type="email"
-										placeholder="Your Email"
+										placeholder={ t().email_placeholder }
 									/>
 									<FormField
 										value={ password }
 										onChange={(e) => this.passwordChange(e.target.value)}
-										label="Password"
+										label={ t().password_label }
 										type="password"
-										placeholder="Password"
+										placeholder={ t().password_placeholder }
 									/>
-									<Button type="submit" onClick={() => this.loginClick() } text="Login" disabled={ !inputValid } />
+									<Button type="submit" onClick={() => this.loginClick() } text={ t().register } disabled={ !inputValid } />
 								</form>
 							</div>
 						</div>

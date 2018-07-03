@@ -30,12 +30,15 @@ describe('Login', function() {
 
         // test login itself
 
+
     });
 
+    /*
     it('Test register container', function() {
         cy.visit('/register');
         // we expect a form
         cy.get('form').should('exist');
 
     });
-})
+    */
+});

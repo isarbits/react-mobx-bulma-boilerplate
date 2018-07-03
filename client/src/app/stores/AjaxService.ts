@@ -1,12 +1,12 @@
-// import {computed, observable, runInAction} from 'mobx';
-// import storage from 'util/storage';
-// import env from 'env';
+import { computed, observable, runInAction } from 'mobx';
+import axios, { AxiosError, AxiosResponse } from 'axios';
+import { storage } from 'app/utils/storage';
+import env from 'app/env';
 
-// import {instance as notification} from 'util/notification';
+import { instance as notification } from 'app/utils/notification';
 
 export default class AjaxService {
-  /*
-    @observable
+  @observable
   private pendingRequestCount: number = 0;
 
   @computed
@@ -62,25 +62,23 @@ export default class AjaxService {
 
       throw e;
     });
-}
+  }
 
-
-public get(url: string) {
+  public get(url: string) {
     return this.call('GET', url);
-}
+  }
 
-public post(url: string, data?: any) {
+  public post(url: string, data?: any) {
     return this.call('POST', url, data);
-}
+  }
 
-public put(url: string, data?: any) {
+  public put(url: string, data?: any) {
     return this.call('PUT', url, data);
-}
+  }
 
-public delete(url: string, data?: any) {
+  public delete(url: string, data?: any) {
     return this.call('DELETE', url, data);
-}
-  */
+  }
 }
 
 export const instance = new AjaxService();

@@ -7,6 +7,7 @@ import ScrollToTop from './utils/ScrollToTop';
 import NavbarComponent from 'app/components/NavbarComponent';
 import HomeContainer from './containers/HomeContainer';
 import LoginContainer from './containers/auth/LoginContainer';
+import RegisterContainer from './containers/auth/RegisterContainer';
 
 import stores from './stores';
 
@@ -21,6 +22,7 @@ export default class App extends React.Component<any, any> {
 						<NavbarComponent />
 						<Route exact path="/" component={ HomeContainer }/>
 						<Route exact path="/login" component={ LoginContainer }/>
+						<Route exact path="/register" component={ RegisterContainer }/>
 					</ScrollToTop>
 				</Router>
 			</Provider>

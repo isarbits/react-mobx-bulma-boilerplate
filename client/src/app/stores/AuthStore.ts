@@ -1,7 +1,6 @@
 import { action, observable } from 'mobx';
-import { instance as ajax } from './AjaxService';
+import { instance as ajax } from 'app/stores/AjaxService';
 import { storage } from 'app/utils/storage';
-import { t, todo } from 'app/utils/translate';
 
 import SessionModel from 'app/models/SessionModel';
 import SessionUserModel from 'app/models/SessionUserModel';
@@ -95,7 +94,7 @@ export default class SessionStore {
   public hasRight?(right: string) {
     return this.user && this.user.rights && this.user.rights.includes(right);
   }
-
+/*
   public get isAdmin() {
     return !this.user.customer && this.hasRight('CAN_MANAGE_CUSTOMER_USERS') || this.hasRight('CAN_MANAGE_PLANTS') || this.hasRight('CAN_MANAGE_VENDORS');
   }
@@ -103,7 +102,7 @@ export default class SessionStore {
   public get isCustomerAdmin() {
     return this.user.customer != null && this.hasRight('CAN_MANAGE_CUSTOMER_USERS');
   }
+*/
 }
 
 export const instance = new SessionStore();
-*/

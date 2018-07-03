@@ -10,7 +10,8 @@
     "baseUrl": "src",
     "experimentalDecorators": true,
     "alwaysStrict": true,
-    "lib": ["es2015", "es5", "es2016", "es6", "dom"]
+    "lib": ["es2015", "es5", "es2016", "es6", "dom"],
+    "resolveJsonModule": true
   },
   "include": [
     "./src/**/*"

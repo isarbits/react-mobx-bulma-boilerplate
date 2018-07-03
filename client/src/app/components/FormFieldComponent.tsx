@@ -9,11 +9,26 @@ interface IProps {
     onChange: (e: any) => void;
 }
 
-export default class FormField extends React.Component<IProps, any> {
+interface IState {
+    inputValue: string;
+}
+
+export default class FormField extends React.Component<IProps, IState> {
+
+    constructor(props: any) {
+        super(props);
+
+        this.state = {
+            inputValue: undefined
+        };
+    }
 
     public render() {
 
         const { value, type, label, help, placeholder } = this.props;
+        const { inputValue } = this.state;
+
+        console.log('VAL', inputValue);
 
         return (
             <div className="field">
@@ -21,7 +36,7 @@ export default class FormField extends React.Component<IProps, any> {
                     <label className="label">{ label }</label>
                 }
                 <div className="control">
-                    <input value={ value } onChange={(e) => this.props.onChange(e) } type={ type ? type : 'text' } className="input" placeholder={ placeholder }/>
+                    <input value={ inputValue } onChange={(e) => this.props.onChange(e) } type={ type ? type : 'text' } className="input" placeholder={ placeholder }/>
                 </div>
 
                 {help &&

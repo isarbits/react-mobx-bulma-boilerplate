@@ -1,6 +1,6 @@
-// import ajax from './AjaxService';
+import ajax from './AjaxService';
 // import { instance as session } from 'stores/SessionStore';
 
 export default {
-    // test
-}
+    ajax
+};
