@@ -9,10 +9,7 @@ export default class AuthStore {
   @observable public user: SessionUserModel;
 
   public register(email: string, password: string) {
-    return ajax.post('auth/register', { email, password })
-      .then((res) => {
-        console.log(res);
-      });
+    return ajax.post('auth/register', { email, password });
   }
 
   public sendMagicLink(email: string) {

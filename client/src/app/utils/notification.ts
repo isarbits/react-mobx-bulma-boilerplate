@@ -30,7 +30,6 @@ class Notification {
   }
 
   public error = (msg: string) => {
-    console.log('ERRRRR');
     new NotyTypeProxy({
       type: 'error',
       text: msg,

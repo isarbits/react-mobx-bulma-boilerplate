@@ -44,14 +44,6 @@ export default class RegisterContainer extends React.Component<any, IState> {
 		//this.setState({ inputValid: validator.isEmail(email) && password.length >= 6 });
 	}
 
-	private buttonClick() {
-		const { email, password } = this.state;
-		const { auth } = this.props;
-
-		console.log(auth.register(email, password));
-
-	}
-
 	private formSubmit(e: React.SyntheticEvent) {
 		e.preventDefault();
 		const { email, password } = this.state;
