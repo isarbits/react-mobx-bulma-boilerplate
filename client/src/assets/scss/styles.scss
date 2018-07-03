@@ -3,6 +3,9 @@
 @import "variables.scss";
 @import "~bulma";
 
+@import "~noty/src/noty";
+@import "~noty/src/themes/mint";
+
 body {
     background: white;
 }

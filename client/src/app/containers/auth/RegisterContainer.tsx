@@ -6,13 +6,17 @@ import Section from 'app/components/SectionComponent';
 import Container from 'app/components/ContainerComponent';
 import FormField from 'app/components/FormFieldComponent';
 import Button from 'app/components/ButtonComponent';
+import AuthStore from 'app/stores/AuthStore';
+import { inject } from 'mobx-react';
 
 interface IState {
 	email: string;
 	password: string;
 	inputValid: boolean;
+	auth?: AuthStore;
 }
 
+@inject('auth')
 export default class RegisterContainer extends React.Component<any, IState> {
 
 	constructor(props: any) {
@@ -23,10 +27,6 @@ export default class RegisterContainer extends React.Component<any, IState> {
 			password: '',
 			inputValid: true
 		};
-	}
-
-	public componentDidMount() {
-		this.validateInput();
 	}
 
 	private emailChange(eValue: string) {
@@ -41,12 +41,23 @@ export default class RegisterContainer extends React.Component<any, IState> {
 
 	private validateInput() {
 		const { email, password } = this.state;
-		this.setState({ inputValid: validator.isEmail(email) && password.length >= 6 });
+		//this.setState({ inputValid: validator.isEmail(email) && password.length >= 6 });
 	}
 
-	private loginClick() {
+	private buttonClick() {
 		const { email, password } = this.state;
-		console.log(email, password);
+		const { auth } = this.props;
+
+		console.log(auth.register(email, password));
+
+	}
+
+	private formSubmit(e: React.SyntheticEvent) {
+		e.preventDefault();
+		const { email, password } = this.state;
+		const { auth } = this.props;
+
+		console.log(auth.register(email, password));
 	}
 
 	public render() {
@@ -61,7 +72,7 @@ export default class RegisterContainer extends React.Component<any, IState> {
 							<div className="box">
 								<h1 className="title">{ t().register }</h1>
 
-								<form className="form">
+								<form className="form" onSubmit={(e) => this.formSubmit(e)}>
 									<FormField
 										value={ email }
 										onChange={(e) => this.emailChange(e.target.value)}
@@ -76,7 +87,7 @@ export default class RegisterContainer extends React.Component<any, IState> {
 										type="password"
 										placeholder={ t().password_placeholder }
 									/>
-									<Button type="submit" onClick={() => this.loginClick() } text={ t().register } disabled={ !inputValid } />
+									<Button type="submit" text={ t().register } disabled={ !inputValid } />
 								</form>
 							</div>
 						</div>

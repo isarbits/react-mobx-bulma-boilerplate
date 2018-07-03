@@ -4,7 +4,7 @@ interface IProps {
     text: string;
     disabled?: boolean;
     type?: string;
-    onClick: () => void;
+    onClick?: () => void;
 }
 
 export default class Button extends React.Component<IProps, any> {

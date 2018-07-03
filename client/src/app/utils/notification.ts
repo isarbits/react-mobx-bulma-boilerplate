@@ -2,7 +2,7 @@ import * as Noty from 'noty';
 
 const NotyTypeProxy: any = Noty; // tslint:disable-line variable-name
 
-const timeout = 3500;
+const timeout = 5000;
 
 class Notification {
   public success = (msg: string) => {
@@ -30,6 +30,7 @@ class Notification {
   }
 
   public error = (msg: string) => {
+    console.log('ERRRRR');
     new NotyTypeProxy({
       type: 'error',
       text: msg,

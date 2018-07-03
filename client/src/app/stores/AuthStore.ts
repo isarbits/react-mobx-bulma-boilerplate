@@ -5,8 +5,15 @@ import { storage } from 'app/utils/storage';
 import SessionModel from 'app/models/SessionModel';
 import SessionUserModel from 'app/models/SessionUserModel';
 
-export default class SessionStore {
+export default class AuthStore {
   @observable public user: SessionUserModel;
+
+  public register(email: string, password: string) {
+    return ajax.post('auth/register', { email, password })
+      .then((res) => {
+        console.log(res);
+      });
+  }
 
   public sendMagicLink(email: string) {
     return ajax.post('auth/magiclink', { email });
@@ -105,4 +112,4 @@ export default class SessionStore {
 */
 }
 
-export const instance = new SessionStore();
+export const instance = new AuthStore();
