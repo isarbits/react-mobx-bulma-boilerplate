@@ -23,9 +23,9 @@ export default class App extends React.Component<any, any> {
 					<ScrollToTop>
 						<NavbarComponent />
 						<Route exact path="/" component={ HomeContainer }/>
-						<Route exact path="/login" component={ LoginContainer }/>
 						<Route exact path="/register" component={ RegisterContainer }/>
 						<Route exact path="/register/confirm/:hash?" component={ RegisterConfirmContainer } />
+						<Route exact path="/login" component={ LoginContainer }/>
 					</ScrollToTop>
 				</Router>
 			</Provider>
