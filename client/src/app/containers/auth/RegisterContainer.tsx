@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { withRouter } from 'react-router-dom';
 import * as validator from 'validator';
 
 import { t, todo } from 'app/utils/translate';
@@ -14,6 +15,7 @@ interface IState {
 	password: string;
 	inputValid: boolean;
 	auth?: AuthStore;
+	emailSubmitted: boolean;
 }
 
 @inject('auth')
@@ -25,7 +27,8 @@ export default class RegisterContainer extends React.Component<any, IState> {
 		this.state = {
 			email: '',
 			password: '',
-			inputValid: true
+			inputValid: true,
+			emailSubmitted: false
 		};
 	}
 
@@ -41,7 +44,7 @@ export default class RegisterContainer extends React.Component<any, IState> {
 
 	private validateInput() {
 		const { email, password } = this.state;
-		//this.setState({ inputValid: validator.isEmail(email) && password.length >= 6 });
+		this.setState({ inputValid: validator.isEmail(email) && password.length >= 6 });
 	}
 
 	private formSubmit(e: React.SyntheticEvent) {
@@ -49,39 +52,51 @@ export default class RegisterContainer extends React.Component<any, IState> {
 		const { email, password } = this.state;
 		const { auth } = this.props;
 
-		console.log(auth.register(email, password));
+		auth.register(email, password).then((res: any) => {
+			console.info('Registration submitted', res);
+			this.setState({ emailSubmitted: true });
+		});
 	}
 
 	public render() {
 
-		const { email, password, inputValid } = this.state;
+		const { email, password, inputValid, emailSubmitted } = this.state;
 
 		return(
 			<Section>
 				<Container>
 					<div className="columns">
 						<div className="column is-6 is-offset-3">
-							<div className="box">
-								<h1 className="title">{ t().register }</h1>
+							{!emailSubmitted ? (
+								<div className="box">
+									<h1 className="title">{ t().register }</h1>
 
-								<form className="form" onSubmit={(e) => this.formSubmit(e)}>
-									<FormField
-										value={ email }
-										onChange={(e) => this.emailChange(e.target.value)}
-										label={ t().email_label }
-										type="email"
-										placeholder={ t().email_placeholder }
-									/>
-									<FormField
-										value={ password }
-										onChange={(e) => this.passwordChange(e.target.value)}
-										label={ t().password_label }
-										type="password"
-										placeholder={ t().password_placeholder }
-									/>
-									<Button type="submit" text={ t().register } disabled={ !inputValid } />
-								</form>
-							</div>
+									<form className="form" onSubmit={(e) => this.formSubmit(e)}>
+										<FormField
+											value={ email }
+											onChange={(e) => this.emailChange(e.target.value)}
+											label={ t().email_label }
+											type="email"
+											placeholder={ t().email_placeholder }
+										/>
+										<FormField
+											value={ password }
+											onChange={(e) => this.passwordChange(e.target.value)}
+											label={ t().password_label }
+											type="password"
+											placeholder={ t().password_placeholder }
+										/>
+										<Button type="submit" text={ t().register } disabled={ !inputValid } />
+									</form>
+								</div>
+							) : (
+								<div className="box">
+									<div className="content">
+										<h1 className="title">{ t().register_confirm_title }</h1>
+										<p>{ t().register_confirm_text }</p>
+									</div>
+								</div>
+							)}
 						</div>
 					</div>
 				</Container>

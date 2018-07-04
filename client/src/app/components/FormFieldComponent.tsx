@@ -28,8 +28,6 @@ export default class FormField extends React.Component<IProps, IState> {
         const { value, type, label, help, placeholder } = this.props;
         const { inputValue } = this.state;
 
-        console.log('VAL', inputValue);
-
         return (
             <div className="field">
                 {label &&

@@ -20,9 +20,7 @@ export default class Section extends React.Component<IProps, any> {
 
         return (
             <section className={ classes }>
-                <Container>
-                    { children }
-                </Container>
+                { children }
             </section>
         );
     }

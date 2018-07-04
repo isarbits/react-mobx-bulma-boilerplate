@@ -11,6 +11,11 @@ export default class AuthStore {
   public register(email: string, password: string) {
     return ajax.post('auth/register', { email, password });
   }
+  public verifyEmail(hash: string) {
+    return ajax.get('auth/verify-email?hash=' + hash);
+  }
+
+
 
   public sendMagicLink(email: string) {
     return ajax.post('auth/magiclink', { email });

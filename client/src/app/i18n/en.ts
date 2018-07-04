@@ -1,15 +1,23 @@
-const lang: any = {};
-
-lang.key = 'en';
-lang.lang = 'English';
-lang.login = 'Login';
-lang.register = 'Register';
-lang.email_label = 'E-Mail Address';
-lang.email_placeholder = 'Your E-Mail';
-lang.password_label = 'Password';
-lang.password_placeholder = 'Your password';
-lang.button_register = 'Register now';
-lang.button_login = 'Login';
-lang.forgot_password = 'Forgot password';
+const lang = {
+    key: 'en',
+    lang: 'English',
+    login: 'Login',
+    register: 'Register',
+    email_label: 'E-Mail Address',
+    email_placeholder: 'Your E-Mail',
+    password_label: 'Password',
+    password_placeholder: 'Your password',
+    button_register: 'Register now',
+    button_login: 'Login',
+    forgot_password: 'Forgot password',
+    register_confirm_title: 'Almost done',
+    register_confirm_text: 'We have sent a confirmation link to your E-Mail adress. Please click on the link to finalize your registration.',
+    register_confirming_title: 'Confirming email',
+    register_confirming_text: 'Confirming E-Mail, please wait a few seconds...',
+    register_success_title: 'E-Mail Confirmed',
+    register_success_text: 'Your E-Mail address has been confirmed. You can now log in.',
+    register_failed_title: 'E-Mail Confirmation Failed',
+    register_failed_text: 'Unable to confirm E-Mail.',
+};
 
 export default lang;
