@@ -6,7 +6,9 @@ import FormField from 'app/components/FormFieldComponent';
 import Button from 'app/components/ButtonComponent';
 
 interface IProps {
-	title: string;
+	buttonText: string;
+	isForgotPassword?: boolean;
+	isResetPassword?: boolean;
 	onSubmit: (email: string, password: string) => void;
 }
 
@@ -24,23 +26,30 @@ export default class AuthForm extends React.Component<IProps, IState> {
 		this.state = {
 			email: '',
 			password: '',
-			inputValid: true
+			inputValid: false
 		};
 	}
 
 	private emailChange(eValue: string) {
-		this.setState({ email: eValue });
-		this.validateInput();
+		this.setState({ email: eValue }, () => {
+			this.validateInput();
+		});
 	}
 
 	private passwordChange(eValue: string) {
-		this.setState({ password: eValue });
-		this.validateInput();
+		this.setState({ password: eValue }, () => {
+			this.validateInput();
+		});
 	}
 
 	private validateInput() {
 		const { email, password } = this.state;
-		this.setState({ inputValid: validator.isEmail(email) && password.length >= 6 });
+		const { isForgotPassword, isResetPassword } = this.props;
+
+		const emailValid: boolean = isResetPassword || validator.isEmail(email);
+		const passwordValid: boolean = isForgotPassword || password.length >= 6;
+
+		this.setState({ inputValid: emailValid && passwordValid });
 	}
 
 	private submitAction(e: React.SyntheticEvent) {
@@ -52,30 +61,31 @@ export default class AuthForm extends React.Component<IProps, IState> {
 	public render() {
 
 		const { email, password, inputValid } = this.state;
-		const { title } = this.props;
+		const { buttonText, isForgotPassword, isResetPassword } = this.props;
 
 		return(
-            <div className="box">
-                <h1 className="title">{ title }</h1>
+			<form className="form" onSubmit={ (e) => this.submitAction(e) }>
+				{!isResetPassword &&
+					<FormField
+						value={ email }
+						onChange={(e) => this.emailChange(e.target.value)}
+						label={ t().email_label }
+						type="email"
+						placeholder={ t().email_placeholder }
+					/>
+				}
 
-                <form className="form" onSubmit={ (e) => this.submitAction(e) }>
-                    <FormField
-                        value={ email }
-                        onChange={(e) => this.emailChange(e.target.value)}
-                        label={ t().email_label }
-                        type="email"
-                        placeholder={ t().email_placeholder }
-                    />
-                    <FormField
-                        value={ password }
-                        onChange={(e) => this.passwordChange(e.target.value)}
-                        label={ t().password_label }
-                        type="password"
-                        placeholder={ t().password_placeholder }
-                    />
-                    <Button type="submit" text={ title } disabled={ !inputValid } />
-                </form>
-            </div>
+				{!isForgotPassword &&
+					<FormField
+					value={ password }
+					onChange={(e) => this.passwordChange(e.target.value)}
+					label={ t().password_label }
+					type="password"
+					placeholder={ t().password_placeholder }
+					/>
+				}
+				<Button type="submit" text={ buttonText } disabled={ !inputValid } />
+			</form>
 		);
 	}
 }

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "yarn && webpack-dev-server --config ./webpack.app.dev.js --hot --progress",
+    "dev": "webpack-dev-server --config ./webpack.app.dev.js --hot --progress",
     "build": "NODE_ENV=production npm run vendor.production && NODE_ENV=production npm run app.production",
     "storybook": "start-storybook -p 9001 -c storybook",
     "pretest": "node pretest.js",

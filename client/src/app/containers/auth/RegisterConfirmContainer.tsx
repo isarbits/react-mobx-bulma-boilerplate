@@ -1,11 +1,8 @@
 import * as React from 'react';
 
-import AuthStore from 'app/stores/AuthStore';
-
 import { t, todo } from 'app/utils/translate';
 import Section from 'app/components/SectionComponent';
 import Container from 'app/components/ContainerComponent';
-import Button from 'app/components/ButtonComponent';
 import { inject } from 'mobx-react';
 import { Link } from 'react-router-dom';
 
@@ -57,7 +54,6 @@ export default class RegisterConfirmContainer extends React.Component<any, IStat
 
 	public render() {
 
-		const { match: { params } } = this.props;
 		const { title, text, showLoginButton } = this.state;
 
 		return(

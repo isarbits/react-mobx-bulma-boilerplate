@@ -43,16 +43,17 @@ export default class RegisterContainer extends React.Component<IProps, IState> {
 				<Container>
 					<div className="columns">
 						<div className="column is-6 is-offset-3">
-							{!emailSubmitted ? (
-								<AuthForm title={ t().register } onSubmit={ (email, password) => this.formSubmit(email, password) }/>
-							) : (
-								<div className="box">
+							<div className="box">
+								<h1 className="title">{ t().register }</h1>
+								{!emailSubmitted ? (
+									<AuthForm buttonText={ t().register } onSubmit={ (email, password) => this.formSubmit(email, password) }/>
+								) : (
 									<div className="content">
 										<h1 className="title">{ t().register_confirm_title }</h1>
 										<p>{ t().register_confirm_text }</p>
 									</div>
-								</div>
-							)}
+								)}
+							</div>
 						</div>
 					</div>
 				</Container>

@@ -14,20 +14,18 @@ export default class AuthStore {
   public verifyEmail(hash: string) {
     return ajax.get('auth/verify-email?hash=' + hash);
   }
-
+  public forgotPassword(email: string) {
+    return ajax.post('auth/forgot-password', { email });
+  }
+  public changePassword(hash: string, password: string) {
+    return ajax.post('auth/change-password', { hash, password });
+  }
 
 
   public sendMagicLink(email: string) {
     return ajax.post('auth/magiclink', { email });
   }
 
-  public requestPasswordReset(email: string) {
-    return ajax.post('auth/resetpassword', { email });
-  }
-
-  public doPasswordReset(uuid: string, password: string) {
-    return ajax.post(`auth/resetpassword/${uuid}`, { password });
-  }
 
   public changeUserPassword(oldPassword: string, newPassword: string) {
     return ajax.post(`users/${this.user.id}/changepassword`, { oldPassword, password: newPassword });

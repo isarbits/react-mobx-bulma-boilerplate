@@ -1,6 +1,10 @@
 describe('Register', function() {
 
-    it('Test register container', function() {
+    it('Init test database', function() {
+        cy.exec('yarn pretest');
+    });
+
+    it('Test initial state', function() {
         cy.visit('/register');
         // we expect a form
         cy.get('form').should('exist');
@@ -8,21 +12,22 @@ describe('Register', function() {
         cy.get('form').find('input[type=email]').should('exist').clear();
         // it has password field
         cy.get('form').find('input[type=password]').should('exist').clear();
-        // button should exist and be enabled because initial state
+        // button should exist and be disabled because fields are empty
         cy.get('form').find('[type=submit]').should('exist')
-            .should('be.enabled');
+            .should('be.disabled');
         // input field works
         cy.get('input[type=email]')
             .type('fake@email.com').should('have.value', 'fake@email.com');
-        // button should now be disabled
+        // button should be disabled
         cy.get('form').find('[type=submit]').should('be.disabled');
-
         // password field works
         cy.get('input[type=password]')
             .type('password').should('have.value', 'password');
-        // button should now be enabled
+        // button should be enabled
         cy.get('form').find('[type=submit]').should('be.enabled');
+    });
 
+    it('Test validation', function() {
         // test validation
         // invalid email
         cy.get('input[type=email]').clear().type('bademail');
@@ -34,7 +39,9 @@ describe('Register', function() {
         cy.get('input[type=password]').clear().type('pw');
         // button should be disabled
         cy.get('form').find('[type=submit]').should('be.disabled');
+    });
 
+    it('Submit valid data', function() {
         // valid inputs email
         cy.get('input[type=email]').clear().type('test1@test.com');
         cy.get('input[type=password]').clear().type('validpassword');
@@ -46,50 +53,14 @@ describe('Register', function() {
 
         // check if view changed
         cy.get('h1').should('contain', 'Almost done');
+    });
 
+    it('Submit same data again', function() {
         // do test again with same details, should give error
         cy.visit('/register');
         cy.get('input[type=email]').clear().type('test1@test.com');
         cy.get('input[type=password]').clear().type('validpassword');
         cy.get('form').find('[type=submit]').click();
         cy.get('.noty_layout .noty_type__error').should('exist');
-
     });
-
-
-/*
-    it('Test login container', function() {
-        cy.visit('/login');
-        // we expect a form
-        cy.get('form').should('exist');
-        // it has email field
-        cy.get('form').find('input[type=email]').should('exist').clear();
-        // it has password field
-        cy.get('form').find('input[type=password]').should('exist').clear();
-        // button should exist and be disabled because inputs are empty
-        cy.get('form').find('[type=submit]').should('exist')
-            .should('be.disabled');
-        // input field works
-        cy.get('input[type=email]')
-            .type('fake@email.com').should('have.value', 'fake@email.com');
-        // button should still be disabled
-        cy.get('form').find('[type=submit]').should('be.disabled');
-
-        // password field works
-        cy.get('input[type=password]')
-            .type('password').should('have.value', 'password');
-        // button should now be enabled
-        cy.get('form').find('[type=submit]').should('be.enabled');
-
-        // test validation
-        // invalid email
-        cy.get('input[type=email]').clear().type('bademail');
-        // button should now be disabled
-        cy.get('form').find('[type=submit]').should('be.disabled');
-
-        // test login itself
-
-    });
-    */
-
 });
